@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <template class="PhoshTrayQuickSetting" parent="PhoshQuickSetting">
+    <property name="visible">1</property>
+    <property name="status-icon">status_icon</property>
+  </template>
+  <!-- This is the tile's own icon+label, shown directly in the
+       quick-settings grid. The actual per-item tray content lives in a
+       GtkListBox built programmatically in tray-quick-setting.c and
+       attached via phosh_quick_setting_set_status_page(), that widget
+       isn't representable declaratively since its children come and go
+       at runtime as SNI items register/unregister.  -->
+  <object class="PhoshStatusIcon" id="status_icon">
+    <property name="visible">1</property>
+    <property name="icon-name">view-grid-symbolic</property>
+    <property name="info" translatable="yes">Tray</property>
+  </object>
+</interface>

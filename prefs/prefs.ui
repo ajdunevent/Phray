@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="phosh">
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="libadwaita" version="1.6"/>
+  <template class="PhoshTrayQuickSettingPrefs" parent="AdwPreferencesDialog">
+    <property name="follows-content-size">True</property>
+    <property name="title" translatable="1">Phray Preferences</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon-name">view-grid-symbolic</property>
+        <property name="title" translatable="1">Tray</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="1">Appearance</property>
+            <child>
+              <object class="AdwSwitchRow" id="prefer_full_color_icons_row">
+                <property name="title" translatable="1">Prefer full-color icons</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="1">Sources</property>
+            <child>
+              <object class="AdwSwitchRow" id="enable_sni_row">
+                <property name="title" translatable="1">StatusNotifierItem apps</property>
+                <property name="subtitle" translatable="1">System tray and AppIndicators</property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwSwitchRow" id="enable_background_apps_row">
+                <property name="title" translatable="1">Background Portal apps</property>
+                <property name="subtitle" translatable="1">Flatpaks running without a window</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="1">Background Portal</property>
+            <child>
+              <object class="AdwSwitchRow" id="background_portal_row">
+                <property name="title" translatable="1">Provide Background Portal</property>
+                <property name="subtitle" translatable="1">Changes apply on Phosh restart</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="1">Apps</property>
+            <property name="description" translatable="1">Hide specific entries</property>
+            <child>
+              <object class="GtkListBox" id="apps_listbox">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

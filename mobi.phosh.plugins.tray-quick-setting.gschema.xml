@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="mobi.phosh.plugins.tray-quick-setting"
+          path="/mobi/phosh/plugins/tray-quick-setting/">
+    <key name="provide-background-portal" type="b">
+      <default>true</default>
+      <summary>Provide the Background Apps portal</summary>
+      <description>
+        Whether Phray should implement org.freedesktop.impl.portal.Background
+        itself, filling the gap left by xdg-desktop-portal-phosh not
+        implementing it. Only takes effect if no other installed portal
+        backend already provides it.
+      </description>
+    </key>
+
+    <key name="enable-sni" type="b">
+      <default>true</default>
+      <summary>Show StatusNotifierItem apps</summary>
+      <description>
+        Master toggle for the whole SNI/AppIndicator source. When off, no
+        SNI apps show in the tray or in the per-app filtering list below
+        (nothing to individually exclude if the whole source is off).
+      </description>
+    </key>
+
+    <key name="enable-background-apps" type="b">
+      <default>true</default>
+      <summary>Show Background Apps portal apps</summary>
+      <description>
+        Master toggle for the whole background-portal source. When off,
+        no background apps show in the tray or in the per-app filtering
+        list below. Independent of provide-background-portal, which
+        controls whether Phray implements the portal backend itself --
+        this controls whether Phray displays apps from that
+        source at all, regardless of who provides it.
+      </description>
+    </key>
+
+    <key name="prefer-symbolic-icons" type="b">
+      <default>false</default>
+      <summary>Prefer symbolic icon variants over full-color</summary>
+      <description>
+        When true, prefer symbolic icon variants for background app
+        icons where available, falling back to whatever the app
+        provides if no symbolic variant exists in the current icon theme.
+        Affects both the tray's background-app icons and the per-app
+        icons shown in this prefs dialog's Apps list. The UI presents
+        this inverted, as "Prefer full-color icons".
+      </description>
+    </key>
+
+    <key name="disabled-apps" type="as">
+      <default>[]</default>
+      <summary>Per-source app identifiers hidden from the tray</summary>
+      <description>
+        Each entry is "sni:&lt;Id&gt;" (the SNI item's stable Id property,
+        not its Title, which can show dynamic status text) or
+        "bg:&lt;app_id&gt;" (the background-portal app_id). Disabling is
+        per source deliberately, since the same app can appear via both.
+      </description>
+    </key>
+  </schema>
+</schemalist>

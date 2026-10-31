@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gresources>
+  <gresource prefix="/mobi/phosh/plugins/tray-quick-setting-prefs/">
+    <file preprocess="xml-stripblanks">prefs.ui</file>
+  </gresource>
+  <!-- Separate gresource block outside the prefix above:
+       gtk_icon_theme_add_resource_path() expects a path with an
+       icon-theme-style scalable/actions/ subdirectory structure, so the
+       aliases place the SVGs there without moving the source files. -->
+  <gresource prefix="/mobi/phosh/plugins/tray-quick-setting-prefs/icons">
+    <file alias="scalable/actions/eye-open-negative-filled-symbolic.svg">eye-open-negative-filled-symbolic.svg</file>
+    <file alias="scalable/actions/eye-not-looking-symbolic.svg">eye-not-looking-symbolic.svg</file>
+  </gresource>
+</gresources>

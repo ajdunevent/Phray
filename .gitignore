@@ -1,0 +1,38 @@
+# Meson build directory, also what local test builds use
+# (meson setup builddir && ninja -C builddir && sudo ninja -C builddir
+# install), matching the project's own build routine.
+builddir/
+
+# Build directory created by dpkg-buildpackage (dh's meson buildsystem).
+obj-*/
+
+# Compiled compile_commands.json, when symlinked/copied to the project
+# root by editor/IDE tooling. It's generated inside builddir/, already
+# covered above; this entry is just for the root-level copy some
+# setups create.
+/compile_commands.json
+
+# Debian packaging build artifacts. Unlike most meson output, these
+# land directly in-tree (not inside builddir/) when dpkg-buildpackage/
+# debhelper run.
+debian/.debhelper/
+debian/phray/
+debian/tmp/
+debian/files
+debian/*.substvars
+debian/*.debhelper.log
+debian/debhelper-build-stamp
+
+# Regenerated gettext template, not committed, matching standard
+# GNOME/gettext project convention (only the .po translations and
+# po/POTFILES.in/po/LINGUAS themselves are tracked, not the .pot they're
+# generated from/into).
+po/*.pot
+
+# Editor/OS noise
+*.swp
+*~
+.DS_Store
+
+# Per-machine list of top-level paths excluded from Nextcloud sync.
+.no-sync

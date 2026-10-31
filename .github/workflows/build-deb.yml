@@ -1,0 +1,95 @@
+name: Build aarch64 .deb
+
+# Tagged releases only (e.g. v0.1.0), not every push.
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    # Native ARM64 GitHub-hosted runner, free for public repositories,
+    # so no QEMU/cross-compilation is needed. This runner label only
+    # works on public repos without a paid Team/Enterprise plan.
+    runs-on: ubuntu-24.04-arm
+    # debian:forky is an official, multi-arch (including arm64) Docker
+    # Hub tag matching FuriOS's current base (per
+    # /etc/apt/sources.list.d/*.sources on a FuriOS device).
+    container:
+      image: debian:forky
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add FuriOS's package repository
+        # debian:forky provides the base Debian forky repos; this adds
+        # FuriOS's repo on top for the Phosh/libphosh packages, matching
+        # the device rather than whatever plain Debian forky carries at
+        # any given snapshot. The keyring (a public key) is committed
+        # as debian/furilabs.gpg since it isn't downloadable anywhere;
+        # it was extracted from a FuriOS device.
+        run: |
+          cp debian/furilabs.gpg /etc/apt/trusted.gpg.d/furilabs.gpg
+          echo 'deb [signed-by=/etc/apt/trusted.gpg.d/furilabs.gpg] https://production.repo.furios.io forky main' \
+            > /etc/apt/sources.list.d/furios.list
+          apt-get update
+
+      - name: Install build dependencies
+        # Every package name here was verified against a FuriOS device
+        # via dpkg -S on each dependency's .pc file. A couple
+        # (libgio-2.0-dev for glib-2.0, phosh-dev for phosh-plugins)
+        # differ from naming convention.
+        run: |
+          apt-get install -y --no-install-recommends \
+            build-essential \
+            debhelper \
+            meson \
+            ninja-build \
+            pkg-config \
+            libgtk-3-dev \
+            libgio-2.0-dev \
+            libphosh-0.45-dev \
+            gsettings-desktop-schemas-dev \
+            libhandy-1-dev \
+            libwayland-dev \
+            libwayland-bin \
+            phosh-dev \
+            libgtk-4-dev \
+            libadwaita-1-dev \
+            gettext
+
+      - name: Build package
+        run: dpkg-buildpackage -us -uc -b
+
+      - name: Collect .deb
+        run: |
+          mkdir -p artifacts
+          mv ../*.deb artifacts/
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: phray-deb
+          path: artifacts/*.deb
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download built .deb
+        uses: actions/download-artifact@v4
+        with:
+          name: phray-deb
+          path: artifacts
+
+      - name: Create GitHub Release with the .deb attached
+        # gh is preinstalled on GitHub-hosted runners, and GITHUB_TOKEN is
+        # provided automatically per workflow run.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" artifacts/*.deb \
+            --title "${{ github.ref_name }}" \
+            --generate-notes

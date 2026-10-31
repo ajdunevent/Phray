@@ -1,0 +1,12 @@
+[Plugin]
+# Translators: This is an internal id, no need to translate it 
+Id=@name@
+Name=Phray (System Tray)
+Types=quick-setting;
+Comment=Interact with background apps
+Plugin=@plugins_dir@/libphosh-plugin-@name@.so
+Icon=view-grid-symbolic
+
+[Prefs]
+Id=@name@-prefs
+Plugin=@plugin_prefs_dir@/libphosh-plugin-prefs-@name@.so

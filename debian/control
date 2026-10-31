@@ -1,0 +1,37 @@
+Source: phray
+Section: gnome
+Priority: optional
+Maintainer: AJ Dunevent <aj@dunevent.net>
+Build-Depends: debhelper-compat (= 13),
+               meson,
+               ninja-build,
+               pkg-config,
+               libgtk-3-dev,
+               libgio-2.0-dev,
+               libphosh-0.45-dev,
+               gsettings-desktop-schemas-dev,
+               libhandy-1-dev,
+               libwayland-dev,
+               libwayland-bin,
+               phosh-dev,
+               libgtk-4-dev,
+               libadwaita-1-dev,
+               gettext,
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+Homepage: https://dev.dunevent.net/aj/Phray
+
+Package: phray
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         phosh,
+Description: System tray for Phosh (StatusNotifierItem + Background Apps)
+ Phray is a Phosh quick-settings plugin that combines
+ KStatusNotifierItem/AppIndicator tray icons and the GNOME Background
+ Apps portal into a single tile, bringing desktop-style system tray
+ functionality to Phosh-based mobile Linux.
+ .
+ Includes optional support for providing the
+ org.freedesktop.impl.portal.Background backend itself, for systems
+ where no other backend already provides it.

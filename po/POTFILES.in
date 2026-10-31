@@ -1,0 +1,6 @@
+tray-quick-setting.c
+background-app-item.c
+prefs/tray-quick-setting-prefs.c
+prefs/prefs.ui
+qs.ui
+tray-quick-setting.desktop.in.in
