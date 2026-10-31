@@ -82,12 +82,33 @@ jobs:
         run: dpkg-buildpackage -us -uc -b
 
       - name: Collect .deb
+        id: collect
+        # phray_arm64-latest.deb is a copy with a fixed name, so a release
+        # asset link (releases/latest/download/phray_arm64-latest.deb)
+        # does not change between versions.
         run: |
           mkdir -p artifacts
           mv ../*.deb artifacts/
+          version=$(dpkg-parsechangelog -S Version)
+          cp "artifacts/phray_${version}_arm64.deb" artifacts/phray_arm64-latest.deb
+          echo "deb=phray_${version}_arm64.deb" >> "$GITHUB_OUTPUT"
 
-      - name: Upload build artifact
+      - name: Upload .deb
         uses: actions/upload-artifact@v7
+        # archive: false uploads the file itself instead of a zip.
+        with:
+          path: artifacts/${{ steps.collect.outputs.deb }}
+          archive: false
+
+      - name: Upload phray_arm64-latest.deb
+        uses: actions/upload-artifact@v7
+        with:
+          path: artifacts/phray_arm64-latest.deb
+          archive: false
+
+      - name: Upload release hand-off artifact
+        uses: actions/upload-artifact@v7
+        # All .deb files, zipped, for the release job below.
         with:
           name: phray-deb
           path: artifacts/*.deb
