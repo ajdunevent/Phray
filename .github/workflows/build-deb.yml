@@ -1,10 +1,12 @@
 name: Build aarch64 .deb
 
-# Tagged releases only (e.g. v0.1.0), not every push.
+# Runs on v* tags (e.g. v0.1.0) and on manual dispatch. Only tag runs create
+# a release; manual runs leave the .deb as a run artifact.
 on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -58,6 +60,17 @@ jobs:
             libadwaita-1-dev \
             gettext
 
+      - name: Check tag matches debian/changelog
+        if: startsWith(github.ref, 'refs/tags/v')
+        # The .deb is versioned from debian/changelog; a mismatched tag
+        # would name the Release after a version the package does not have.
+        run: |
+          version=$(dpkg-parsechangelog -S Version)
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match debian/changelog version ${version}"
+            exit 1
+          fi
+
       - name: Build package
         run: dpkg-buildpackage -us -uc -b
 
@@ -74,6 +87,7 @@ jobs:
 
   release:
     needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: write
