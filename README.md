@@ -17,16 +17,37 @@ Developed and tested on FuriOS (Debian forky, aarch64).
   Phosh restart).
 - Settings are available in Mobile Settings.
 
+## Screenshots
+
+<img src="screenshots/background-apps.png" alt="Phray tile expanded, listing background apps" width="250">
+<img src="screenshots/tray-item-menu.png" alt="Tray item menu expanded, with Settings, Pause / Resume, Sync Now, and Quit" width="250">
+<img src="screenshots/portal-app-menu.png" alt="Background Portal app expanded, with Show and Quit" width="250">
+
+<img src="screenshots/mobile-settings.png" alt="Phray in Mobile Settings, Top Bar" width="250">
+<img src="screenshots/preferences.png" alt="Phray Preferences dialog" width="250">
+
 ## Requirements
 
-- Phosh with `libphosh-0.45`
-- GTK 3 and libhandy (main plugin), GTK 4 and libadwaita (settings plugin)
-- `wayland-client`, `wayland-scanner`
-- meson, ninja, gettext
-
-`debian/control` lists the Debian package names.
+- Phosh providing `libphosh-0.45` (built and tested against Phosh 0.58.0).
+- Mobile Settings, to open the settings dialog.
+- `xdg-desktop-portal`, for the Background Apps source, which reads
+  `org.freedesktop.background.Monitor`.
 
 ## Building
+
+### Prerequisites
+
+- `libphosh-0.45` and the `phosh-plugins` pkg-config package (Debian:
+  `libphosh-0.45-dev`, `phosh-dev`)
+- GTK 3 (>= 3.22) and libhandy-1 for the main plugin; GTK 4 and
+  libadwaita-1 for the settings plugin
+- GLib/GIO (>= 2.68) and gsettings-desktop-schemas (>= 42)
+- `wayland-client` and `wayland-scanner`
+- meson (>= 0.59), ninja, pkg-config, gettext
+
+`debian/control` lists the Debian build dependencies.
+
+### Compiling
 
 ```sh
 meson setup builddir
