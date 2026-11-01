@@ -38,6 +38,16 @@ Developed and tested on FuriOS (Debian forky, aarch64).
 - `xdg-desktop-portal`, for the Background Apps source, which reads
   `org.freedesktop.background.Monitor`.
 
+## Installation
+
+Download the [latest `.deb`](https://github.com/ajdunevent/Phray/releases/latest/download/phray_arm64-latest.deb) (arm64) and install it:
+
+```sh
+sudo apt install ./phray_arm64-latest.deb
+```
+
+Versioned packages are on the [releases page](https://github.com/ajdunevent/Phray/releases/latest).
+
 ## Building
 
 ### Prerequisites
