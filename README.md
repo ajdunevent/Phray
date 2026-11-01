@@ -19,12 +19,17 @@ Developed and tested on FuriOS (Debian forky, aarch64).
 
 ## Screenshots
 
-<img src="screenshots/background-apps.png" alt="Phray tile expanded, listing background apps" width="250">
-<img src="screenshots/tray-item-menu.png" alt="Tray item menu expanded, with Settings, Pause / Resume, Sync Now, and Quit" width="250">
-<img src="screenshots/portal-app-menu.png" alt="Background Portal app expanded, with Show and Quit" width="250">
-
-<img src="screenshots/mobile-settings.png" alt="Phray in Mobile Settings, Top Bar" width="250">
-<img src="screenshots/preferences.png" alt="Phray Preferences dialog" width="250">
+<table>
+  <tr>
+    <td valign="top"><img src="screenshots/background-apps.png" alt="Phray tile expanded, listing background apps" width="250"></td>
+    <td valign="top"><img src="screenshots/tray-item-menu.png" alt="Tray item menu expanded, with Settings, Pause / Resume, Sync Now, and Quit" width="250"></td>
+    <td valign="top"><img src="screenshots/portal-app-menu.png" alt="Background Portal app expanded, with Show and Quit" width="250"></td>
+  </tr>
+  <tr>
+    <td valign="top"><img src="screenshots/mobile-settings.png" alt="Phray in Mobile Settings, Top Bar" width="250"></td>
+    <td valign="top"><img src="screenshots/preferences.png" alt="Phray Preferences dialog" width="250"></td>
+  </tr>
+</table>
 
 ## Requirements
 
