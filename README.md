@@ -64,6 +64,22 @@ A Debian package can be built with `dpkg-buildpackage`.
 
 Project page: <https://dev.dunevent.net/aj/Phray>
 
+## AI Disclaimer
+
+This project has relied extensively on AI-assisted development, primarily Anthropic's Claude (various models), under human direction and manual testing.
+
+### Contribution Profile
+
+```
+Phase                    Human █                  ░ AI
+───────────────────────────────────────────────────────
+Requirements & Scope      100% ████████████████████  0%
+Architecture & Design      60% ████████████░░░░░░░░ 40%
+Implementation             15% ███░░░░░░░░░░░░░░░░░ 85%
+Testing                   100% ████████████████████  0%
+Documentation              25% █████░░░░░░░░░░░░░░░ 75%
+```
+
 ## License
 
 GPL-3.0-or-later. See [LICENSE](LICENSE).
